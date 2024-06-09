@@ -1,4 +1,4 @@
-import '../styles/Scoreboard'
+import '../styles/Scoreboard.css'
 
 export default function Scoreboard({ score, bestScore }) {
   return (

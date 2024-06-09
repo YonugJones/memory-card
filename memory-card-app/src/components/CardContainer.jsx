@@ -1,4 +1,4 @@
-import '../styles/CardContainer'
+import '../styles/CardContainer.css'
 import Card from './Card'
 
 export default function CardContainer({ images, onCardClick }) {

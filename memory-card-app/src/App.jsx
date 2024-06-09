@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react'
+import Scoreboard from './components/Scoreboard';
+import CardContainer from './components/CardContainer';
+import { getRandomPokemonIds, fetchPokemonData, shuffleArray } from './api/api';
 import './App.css'
 
 export default function App() {
@@ -8,13 +11,13 @@ export default function App() {
   const [clickedImages, setClickedImages] = useState([]);
 
   useEffect(() => {
-    // Fetch images from API and set them in state
-    fetchImages();
+    async function fetchData() {
+      const ids = getRandomPokemonIds(30, 1000);
+      const pokemonData = await fetchPokemonData(ids);
+      setImages(pokemonData)
+    }
+    fetchData();
   }, [])
-
-  async function fetchImages() {
-    // implement API call here and set images
-  }
 
   function handleCardClick(id) {
     if (clickedImages.includes(id)) {
@@ -31,14 +34,13 @@ export default function App() {
   }
 
   function shuffleImages() {
-    const shuffledImages = [...images].sort(() => Math.random() - 0.5);
-    setImages(shuffledImages)
+    setImages(shuffleArray([...images]))
   }
 
   return (
     <div className='app'>
       <Scoreboard score={score} bestScore={bestScore} />
-      <CardContainer images={images} onClick={handleCardClick} />
+      <CardContainer images={images} onCardClick={handleCardClick} />
     </div>
   )
 }
