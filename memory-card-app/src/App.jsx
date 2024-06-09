@@ -12,7 +12,7 @@ export default function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const ids = getRandomPokemonIds(30, 1000);
+      const ids = getRandomPokemonIds(24, 1000);
       const pokemonData = await fetchPokemonData(ids);
       setImages(pokemonData)
     }
